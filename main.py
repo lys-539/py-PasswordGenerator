@@ -1,6 +1,6 @@
-import generator
+import cli
 
 
 
 if __name__ == '__main__':
-    generator.main()
+    cli.main()
