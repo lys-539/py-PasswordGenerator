@@ -13,16 +13,18 @@ def generate_password(base: str, tail: str) -> str:
 
 
 def update_history(history: dict) -> None:
-    with open('history.json', 'w') as file:
+    history_path = os.path.join(os.path.expanduser('~'), 'LuisAPP', 'PasswordGenerator', 'history.json')
+    with open(history_path, 'w') as file:
         json.dump(history, file, indent=4)
 
 
 def load_history() -> dict:
-    if not os.path.exists('history.json'):
-        with open('history.json', 'w') as file:
+    history_path = os.path.join(os.path.expanduser('~'), 'LuisAPP', 'PasswordGenerator', 'history.json')
+    if not os.path.exists(history_path):
+        with open(history_path, 'w') as file:
             json.dump({}, file)
     
-    with open('history.json', 'r') as file:
+    with open(history_path, 'r') as file:
         try:
             history_ = json.load(file)
         except:
@@ -30,12 +32,13 @@ def load_history() -> dict:
     return history_
 
 def load_config() -> dict:
-    if not os.path.exists('config.json'):
+    config_path = os.path.join(os.path.expanduser('~'), 'LuisAPP', 'PasswordGenerator', 'config.json')
+    if not os.path.exists(config_path):
         base_ = input('Enter base string for password generation: ')
-        with open('config.json', 'w') as file:
+        with open(config_path, 'w') as file:
             json.dump({'base': base_}, file)
 
-    with open('config.json', 'r') as file:
+    with open(config_path, 'r') as file:
         try:
             config = json.load(file)
         except:
@@ -45,22 +48,24 @@ def load_config() -> dict:
 def main() -> None:
     os.system('color')
 
-    if not os.path.exists('config.json'):
+    config_path = os.path.join(os.path.expanduser('~'), 'LuisAPP', 'PasswordGenerator', 'config.json')
+    if not os.path.exists(config_path):
         base_ = input('Enter base string for password generation: ')
-        with open('config.json', 'w') as file:
+        with open(config_path, 'w') as file:
             json.dump({'base': base_}, file)
 
-    with open('config.json', 'r') as file:
+    with open(config_path, 'r') as file:
         try:
             config = json.load(file)
         except:
             config = {}
 
-    if not os.path.exists('history.json'):
-        with open('history.json', 'w') as file:
+    history_path = os.path.join(os.path.expanduser('~'), 'LuisAPP', 'PasswordGenerator', 'history.json')
+    if not os.path.exists(history_path):
+        with open(history_path, 'w') as file:
             json.dump({}, file)
     
-    with open('history.json', 'r') as file:
+    with open(history_path, 'r') as file:
         try:
             history_ = json.load(file)
         except:
